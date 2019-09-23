@@ -34,13 +34,14 @@ import uai.diploma.tique.adapter.AdapterCategorias;
 import uai.diploma.tique.fragment.CategoryFragment;
 import uai.diploma.tique.fragment.IWebServiceFragment;
 import uai.diploma.tique.modelo.Categorias;
+import uai.diploma.tique.modelo.Servicios;
 
 public class WebService {
     Context context;
     IWebServiceFragment fragment;
     RecyclerView recyclerView;
 
-    public WebService(Context context, CategoryFragment fragment, RecyclerView recyclerView) {
+    public WebService(Context context, IWebServiceFragment fragment, RecyclerView recyclerView) {
         this.context = context;
         this.fragment = fragment;
         this.recyclerView = recyclerView;
@@ -117,7 +118,11 @@ public class WebService {
 
                             switch (partialUrl) {
                                 case Constantes.WS_CATEGORIAS:
+                                case Constantes.WS_SUBCATEGORIAS:
                                     respuestaCategorias(response, context);
+                                    break;
+                                case Constantes.WS_SERVICIOS:
+                                    respuestaServicios(response, context);
                                     break;
                             }
 
@@ -229,13 +234,21 @@ public class WebService {
         }
 
         this.fragment.onWebServiceResult(categorias);
-        /*
-        if (categorias.size() > 0) {
-            adapter = new AdapterCategorias(categorias);
-            recyclerView.setAdapter(adapter);
+    }
 
-        }else{
-            Log.i(Constantes.LOG_NAME, "No se encontró resultado");
-        }*/
+    private void respuestaServicios(JSONArray response, Context context) throws JSONException {
+
+        JSONArray responseJson = new JSONArray(response.toString());
+        ArrayList<Servicios> servicios = new ArrayList<>();
+
+
+        for (int i = 0; i < responseJson.length(); i++) {
+
+            Log.d(Constantes.LOG_NAME, responseJson.get(i).toString());
+            JSONObject dataItem = responseJson.getJSONObject(i);
+            servicios.add(new Servicios(dataItem));
+        }
+
+        this.fragment.onWebServiceResult(servicios);
     }
 }

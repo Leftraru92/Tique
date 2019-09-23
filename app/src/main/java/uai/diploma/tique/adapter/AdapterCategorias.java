@@ -49,7 +49,7 @@ public class AdapterCategorias extends
         txtDescription.setText(lcategorias.get(position).getDescription());
         imgIcon.setImageResource(Util.getIcon(lcategorias.get(position).getIcon()));
         //holder.cardView.setOnClickListener(CategoryFragment.myOnClickListener);
-        holder.cardView.setOnClickListener(new onClickListenerCategoria(context, lcategorias.get(position).getCode()));
+        holder.cardView.setOnClickListener(new onClickListenerCategoria(context, lcategorias.get(position).getCode(), lcategorias.get(position).isSon()));
     }
 
     @Override

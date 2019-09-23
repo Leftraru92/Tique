@@ -1,10 +1,11 @@
 package uai.diploma.tique.fragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,40 +17,43 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import uai.diploma.tique.R;
-import uai.diploma.tique.activity.MainActivity;
 import uai.diploma.tique.adapter.AdapterCategorias;
-import uai.diploma.tique.modelo.Categorias;
+import uai.diploma.tique.adapter.AdapterResultadoBusqueda;
+import uai.diploma.tique.fragment.dummy.DummyContent.DummyItem;
+import uai.diploma.tique.modelo.Servicios;
 import uai.diploma.tique.util.Constantes;
 import uai.diploma.tique.util.WebService;
 
-public class SubCategoryFragment extends Fragment implements IWebServiceFragment{
+/**
+ * A fragment representing a list of Items.
+ * <p/>
+ * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
+ * interface.
+ */
+public class ResultadoBusquedaFragment extends Fragment implements IWebServiceFragment{
 
-    private static final String P_CATEGORIA = "CodeCat";
-    private static int codeCat;
+    private static final String P_SUBCATEGORIA = "codeSubCat";
+    private static int codeSubCat;
 
-    private OnFragmentInteractionListener mListener;
+    private OnListFragmentInteractionListener mListener;
     private RecyclerView.LayoutManager layoutManager;
     private static RecyclerView recyclerView;
     public View rootview;
     View loading;
-    ArrayList<Categorias> lcategorias;
-
-    public SubCategoryFragment() {
-        // Required empty public constructor
-    }
+    ArrayList<Servicios> lservicios;
 
     /**
-     * @param codeCat Parameter 1.
-     * @return A new instance of fragment SubCategoryFragment.
+     * Mandatory empty constructor for the fragment manager to instantiate the
+     * fragment (e.g. upon screen orientation changes).
      */
-    public static SubCategoryFragment newInstance(int codeCat) {
-        SubCategoryFragment fragment = new SubCategoryFragment();
+    public ResultadoBusquedaFragment() {
+    }
+
+    public static ResultadoBusquedaFragment newInstance(int codeSubCat) {
+        ResultadoBusquedaFragment fragment = new ResultadoBusquedaFragment();
         Bundle args = new Bundle();
-        args.putInt(P_CATEGORIA, codeCat);
+        args.putInt(P_SUBCATEGORIA, codeSubCat);
         fragment.setArguments(args);
         return fragment;
     }
@@ -57,24 +61,22 @@ public class SubCategoryFragment extends Fragment implements IWebServiceFragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
-            codeCat = getArguments().getInt(P_CATEGORIA);
+            codeSubCat = getArguments().getInt(P_SUBCATEGORIA);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        rootview = inflater.inflate(R.layout.fragment_sub_category, container, false);
+        rootview = inflater.inflate(R.layout.fragment_resultado_busqueda, container, false);
 
         recyclerView = (RecyclerView) rootview.findViewById(R.id.my_recycler_view);
         layoutManager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-        ((MainActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         loading = rootview.findViewById(R.id.loadingPanel);
 
@@ -83,41 +85,35 @@ public class SubCategoryFragment extends Fragment implements IWebServiceFragment
         return rootview;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 /*
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+        if (context instanceof OnListFragmentInteractionListener) {
+            mListener = (OnListFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement OnListFragmentInteractionListener");
         }
     }
 */
+
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
 
-
-    public interface OnFragmentInteractionListener {
+    public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onListFragmentInteraction(DummyItem item);
     }
 
     private void getData() {
 
         try {
 
-            String partialUrl = Constantes.WS_SUBCATEGORIAS;;
+            String partialUrl = Constantes.WS_SERVICIOS;
             String params = null;
             JSONObject body = null;
             //params = "/" + codeCat;
@@ -133,13 +129,13 @@ public class SubCategoryFragment extends Fragment implements IWebServiceFragment
     }
 
     @Override
-    public void onWebServiceResult(ArrayList<?> categorias) {
-        this.lcategorias = (ArrayList<Categorias>)categorias;
-        RecyclerView.Adapter<AdapterCategorias.MyViewHolder> adapter;
+    public void onWebServiceResult(ArrayList<?> servicios) {
+        this.lservicios = (ArrayList<Servicios>)servicios;
+        RecyclerView.Adapter<AdapterResultadoBusqueda.MyViewHolder> adapter;
 
-        if (lcategorias.size() > 0) {
-            Log.i(Constantes.LOG_NAME, "Se encontraron " + lcategorias.size() + " resultados");
-            adapter = new AdapterCategorias(getContext(), lcategorias);
+        if (lservicios.size() > 0) {
+            Log.i(Constantes.LOG_NAME, "Se encontraron " + lservicios.size() + " resultados");
+            adapter = new AdapterResultadoBusqueda(getContext(), lservicios);
             recyclerView.setAdapter(adapter);
 
         }else{

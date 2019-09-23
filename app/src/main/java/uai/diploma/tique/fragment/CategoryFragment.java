@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import uai.diploma.tique.R;
+import uai.diploma.tique.activity.MainActivity;
 import uai.diploma.tique.adapter.AdapterCategorias;
 import uai.diploma.tique.modelo.Categorias;
 import uai.diploma.tique.util.Constantes;
@@ -72,6 +73,8 @@ public class CategoryFragment extends Fragment implements IWebServiceFragment{
         recyclerView.setHasFixedSize(true);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
+        ((MainActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
         loading = rootview.findViewById(R.id.loadingPanel);
 
         getData();
@@ -117,8 +120,8 @@ public class CategoryFragment extends Fragment implements IWebServiceFragment{
         }
     }
 
-    public void onWebServiceResult(ArrayList<Categorias> categorias){
-        this.lcategorias = categorias;
+    public void onWebServiceResult(ArrayList<?> categorias){
+        this.lcategorias = (ArrayList<Categorias>)categorias;
         RecyclerView.Adapter<AdapterCategorias.MyViewHolder> adapter;
 
         if (lcategorias.size() > 0) {

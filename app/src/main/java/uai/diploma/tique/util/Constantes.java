@@ -10,9 +10,9 @@ public class Constantes {
     public static final int DEFAULT_TIMEOUT = 15000;
 
     public static final String WS_DOMINIO = "http://www.mocky.io/v2";
-    public static final String WS_CATEGORIAS = "/5d7e96063300006400f0adc0";
-    public static final String WS_SUBCATEGORIAS = "5d7efea43300000b21f0aee2";
-
+    public static final String WS_CATEGORIAS = "/5d87c220340000cc860a15a6";
+    public static final String WS_SUBCATEGORIAS = "/5d87c262340000e1870a15a7";
+    public static final String WS_SERVICIOS = "/5d87ed263300006c00d7d705";
     public static String TOKEN = " ";
 
     public static final String I_STORE = "store";

@@ -122,7 +122,7 @@ public class ResultadoBusquedaFragment extends Fragment implements IWebServiceFr
 
             WebService webService = new WebService(getContext(), this, recyclerView);
 
-            webService.callService(partialUrl, params, Constantes.M_GET, body);
+            webService.callService(partialUrl, params, Constantes.M_GET, Constantes.R_ARRAY, body);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -143,5 +143,10 @@ public class ResultadoBusquedaFragment extends Fragment implements IWebServiceFr
         }
 
         loading.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onWebServiceResult(Object lista) {
+
     }
 }

@@ -34,6 +34,7 @@ import uai.diploma.tique.adapter.AdapterCategorias;
 import uai.diploma.tique.fragment.CategoryFragment;
 import uai.diploma.tique.fragment.IWebServiceFragment;
 import uai.diploma.tique.modelo.Categorias;
+import uai.diploma.tique.modelo.ServicioDetalle;
 import uai.diploma.tique.modelo.Servicios;
 
 public class WebService {
@@ -47,8 +48,9 @@ public class WebService {
         this.recyclerView = recyclerView;
     }
 
-    public void callService(final String partialUrl, String params, String method, JSONObject jsonBody) throws JSONException {
+    public void callService(final String partialUrl, String params, String method, String typeResponse, JSONObject jsonBody) throws JSONException {
 
+        int methodRequest;
         RequestQueue queue = Volley.newRequestQueue(context);
         String url = Constantes.WS_DOMINIO + partialUrl;
 
@@ -60,12 +62,16 @@ public class WebService {
 
         Log.i(Constantes.LOG_NAME, url);
 
+        if(method.equals(Constantes.M_GET))
+            methodRequest = Request.Method.GET;
+        else {
+            methodRequest = Request.Method.POST;
+        }
 
-        switch (method) {
-            case Constantes.M_POST:
+        switch (typeResponse) {
+            case Constantes.R_OBJECT:
 
-
-                JsonObjectRequest stringRequestPost = new JsonObjectRequest(Request.Method.POST, url,
+                JsonObjectRequest stringRequestPost = new JsonObjectRequest(methodRequest, url,
                         jsonBody,
                         jsonObjectListener(partialUrl, context), newErrorListener()) {
 
@@ -84,9 +90,10 @@ public class WebService {
                 queue.add(stringRequestPost);
 
                 break;
-            case Constantes.M_GET:
 
-                JsonArrayRequest stringRequest = new JsonArrayRequest(Request.Method.GET, url, postparams,
+            case Constantes.R_ARRAY:
+
+                JsonArrayRequest stringRequest = new JsonArrayRequest(methodRequest, url, postparams,
                         jsonArrayListener(partialUrl, context),
                         newErrorListener()) {
 /*
@@ -124,6 +131,7 @@ public class WebService {
                                 case Constantes.WS_SERVICIOS:
                                     respuestaServicios(response, context);
                                     break;
+
                             }
 
 
@@ -140,16 +148,23 @@ public class WebService {
                 };
     }
 
-    private Response.Listener<JSONObject> jsonObjectListener(final String partialUrl, Context context) {
+    private Response.Listener<JSONObject> jsonObjectListener(final String partialUrl, final Context context) {
         return
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.d(Constantes.LOG_NAME, "Respuesta " + partialUrl + ": " + response.toString());
-
-                        switch (partialUrl) {
-                            default:
-                                break;
+                            try {
+                            switch (partialUrl) {
+                                case Constantes.WS_DETALLE:
+                                    respuestaDetalle(response, context);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Log.i(Constantes.LOG_NAME, e.toString());
                         }
                     }
                 };
@@ -250,5 +265,14 @@ public class WebService {
         }
 
         this.fragment.onWebServiceResult(servicios);
+    }
+
+    private void respuestaDetalle(JSONObject response, Context context) throws JSONException {
+
+        JSONObject responseJson = new JSONObject(response.toString());
+        ServicioDetalle servicio = new ServicioDetalle(responseJson);
+
+
+        this.fragment.onWebServiceResult(servicio);
     }
 }

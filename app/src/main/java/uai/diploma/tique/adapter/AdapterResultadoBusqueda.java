@@ -1,11 +1,15 @@
 package uai.diploma.tique.adapter;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +17,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import uai.diploma.tique.R;
+import uai.diploma.tique.activity.DetailActivity;
+import uai.diploma.tique.activity.MainActivity;
 import uai.diploma.tique.fragment.ResultadoBusquedaFragment.OnListFragmentInteractionListener;
 import uai.diploma.tique.fragment.dummy.DummyContent.DummyItem;
 import uai.diploma.tique.modelo.Categorias;
 import uai.diploma.tique.modelo.Servicios;
+import uai.diploma.tique.util.Constantes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,23 +55,21 @@ public class AdapterResultadoBusqueda extends RecyclerView.Adapter<AdapterResult
         holder.txtNombre.setText(lservicios.get(position).getName());
         holder.txtDireccion.setText(lservicios.get(position).getAdress());
 
-        if (!lservicios.get(position).getImage().equals("null")){
-            byte[] decodedString = Base64.decode(lservicios.get(position).getImage(), Base64.DEFAULT);
+        if (!lservicios.get(position).getAvatarImage().equals("null")){
+            byte[] decodedString = Base64.decode(lservicios.get(position).getAvatarImage(), Base64.DEFAULT);
             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
             holder.imgPerfil.setImageBitmap(decodedByte);
         }
 
-/*
-        holder.mView.setOnClickListener(new View.OnClickListener() {
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
-                    mListener.onListFragmentInteraction(holder.mItem);
-                }
+                Log.d(Constantes.LOG_NAME, "se presionó el servicio");
+                Intent i = new Intent((Activity)context, DetailActivity.class);
+                context.startActivity(i);
             }
-        });*/
+        });
     }
 
     @Override
@@ -73,6 +78,7 @@ public class AdapterResultadoBusqueda extends RecyclerView.Adapter<AdapterResult
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
+        CardView cardView;
         public final View mView;
         public final TextView txtNombre;
         public final TextView txtDireccion;
@@ -82,6 +88,7 @@ public class AdapterResultadoBusqueda extends RecyclerView.Adapter<AdapterResult
         public MyViewHolder(View view) {
             super(view);
             mView = view;
+            cardView = itemView.findViewById(R.id.card_view);
             txtNombre = (TextView) view.findViewById(R.id.nombre);
             txtDireccion = (TextView) view.findViewById(R.id.direccion);
             imgPerfil = (ImageView) view.findViewById(R.id.profile_image);

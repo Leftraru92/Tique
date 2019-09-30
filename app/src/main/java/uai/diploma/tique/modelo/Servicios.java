@@ -8,13 +8,13 @@ public class Servicios {
     private int code;
     private String name;
     private String adress;
-    private String image;
+    private String avatar_image;
 
     public Servicios(JSONObject jo) throws JSONException {
         this.code = jo.getInt("code");
         this.name = jo.getString("name");
         this.adress = jo.getString("adress");
-        this.image = jo.getString("image");
+        this.avatar_image = jo.getString("avatar_image");
     }
 
     public int getCode() {
@@ -29,7 +29,7 @@ public class Servicios {
         return adress;
     }
 
-    public String getImage() {
-        return image;
+    public String getAvatarImage() {
+        return avatar_image;
     }
 }

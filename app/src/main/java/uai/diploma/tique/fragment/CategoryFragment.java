@@ -114,7 +114,7 @@ public class CategoryFragment extends Fragment implements IWebServiceFragment{
 
             WebService webService = new WebService(getContext(), this, recyclerView);
 
-            webService.callService(partialUrl, params, Constantes.M_GET, body);
+            webService.callService(partialUrl, params, Constantes.M_GET, Constantes.R_ARRAY, body);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -134,5 +134,10 @@ public class CategoryFragment extends Fragment implements IWebServiceFragment{
         }
 
         loading.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onWebServiceResult(Object lista) {
+
     }
 }

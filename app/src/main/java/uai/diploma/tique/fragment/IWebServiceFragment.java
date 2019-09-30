@@ -7,4 +7,5 @@ import uai.diploma.tique.modelo.Categorias;
 public interface IWebServiceFragment {
 
     void onWebServiceResult(ArrayList<?> lista);
+    void onWebServiceResult(Object lista);
 }

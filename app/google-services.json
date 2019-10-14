@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "222402691470",
+    "firebase_url": "https://tique-c318b.firebaseio.com",
+    "project_id": "tique-c318b",
+    "storage_bucket": "tique-c318b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:222402691470:android:a6696e2f54474cc43c64df",
+        "android_client_info": {
+          "package_name": "uai.diploma.tique"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "222402691470-09ja3to7n3mp8tnhjclutf1hdvle5lm9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "uai.diploma.tique",
+            "certificate_hash": "5a0f15c7084edfe5718c84c9cf3228ba71fd88ae"
+          }
+        },
+        {
+          "client_id": "222402691470-c39kcta5f56t97jdgs5qpd2m2ria7684.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDzDh82ZX805lTrdzIzO0sCdiINR3vpmE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "222402691470-c39kcta5f56t97jdgs5qpd2m2ria7684.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

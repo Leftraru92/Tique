@@ -1,5 +1,9 @@
 package uai.diploma.tique.util;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import uai.diploma.tique.R;
 
 public class Util {
@@ -35,5 +39,24 @@ public class Util {
         }
         return  rIcon;
 
+    }
+
+    public static String getDateFormatted(String fecha) {
+        SimpleDateFormat parseador = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        SimpleDateFormat formateador = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+
+        Date date = null;
+        String dateFormat = null;
+        if (!fecha.toString().equals("0001-01-01T00:00:00")) {
+            try {
+                date = parseador.parse(fecha);
+                dateFormat = formateador.format(date);
+            } catch (ParseException e) {
+                e.printStackTrace();
+                dateFormat = fecha;
+            }
+        }
+
+        return dateFormat;
     }
 }

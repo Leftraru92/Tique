@@ -12,11 +12,11 @@ public class Constantes {
 
     public static final int DEFAULT_TIMEOUT = 15000;
 
-    public static final String WS_DOMINIO = "http://www.mocky.io/v2/";
-    public static final String WS_CATEGORIAS = "5d87c220340000cc860a15a6";
+    public static final String WS_DOMINIO = "https://tiqueapirest.azurewebsites.net/api/";
+    public static final String WS_CATEGORIAS = "Categorias";
     public static final String WS_SUBCATEGORIAS = "5d87c262340000e1870a15a7";
-    public static final String WS_SERVICIOS = "5d8faee63200000d00adecca";
-    public static final String WS_DETALLE = "5d90f3b63000005200cad010";
+    public static final String WS_SERVICIOS = "Servicios";
+    public static final String WS_DETALLE = "ServiciosDetalle";
     public static String TOKEN = " ";
 
     public static final String I_STORE = "store";

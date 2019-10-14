@@ -1,5 +1,6 @@
 package uai.diploma.tique.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +11,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -117,10 +120,10 @@ public class SubCategoryFragment extends Fragment implements IWebServiceFragment
 
         try {
 
-            String partialUrl = Constantes.WS_SUBCATEGORIAS;;
+            String partialUrl = Constantes.WS_CATEGORIAS;;
             String params = null;
             JSONObject body = null;
-            //params = "/" + codeCat;
+            params = "/" + codeCat;
 
             loading.setVisibility(View.VISIBLE);
 
@@ -144,6 +147,8 @@ public class SubCategoryFragment extends Fragment implements IWebServiceFragment
 
         }else{
             Log.i(Constantes.LOG_NAME, "No se encontró resultado");
+            Snackbar.make(rootview.findViewById(R.id.my_recycler_view), "No se encotraron resultados", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
         }
 
         loading.setVisibility(View.GONE);

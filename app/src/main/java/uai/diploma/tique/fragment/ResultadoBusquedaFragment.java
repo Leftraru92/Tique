@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -116,7 +118,7 @@ public class ResultadoBusquedaFragment extends Fragment implements IWebServiceFr
             String partialUrl = Constantes.WS_SERVICIOS;
             String params = null;
             JSONObject body = null;
-            //params = "/" + codeCat;
+            params = "/" + codeSubCat;
 
             loading.setVisibility(View.VISIBLE);
 
@@ -140,6 +142,8 @@ public class ResultadoBusquedaFragment extends Fragment implements IWebServiceFr
 
         }else{
             Log.i(Constantes.LOG_NAME, "No se encontró resultado");
+            Snackbar.make(rootview.findViewById(R.id.my_recycler_view), "No se encotraron resultados", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
         }
 
         loading.setVisibility(View.GONE);

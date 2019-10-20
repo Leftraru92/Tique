@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     tools:context=".fragment.SubCategoryFragment">
 
     <include
-        layout="@layout/loading_cards" />
+        layout="@layout/loading_cards"
+        android:visibility="visible" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/my_recycler_view"

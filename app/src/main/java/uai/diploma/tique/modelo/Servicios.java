@@ -13,7 +13,7 @@ public class Servicios {
     public Servicios(JSONObject jo) throws JSONException {
         this.code = jo.getInt("code");
         this.name = jo.getString("name");
-        this.adress = jo.getString("adress");
+        this.adress = jo.getString("addres");
         this.avatar_image = jo.getString("avatar_image");
     }
 

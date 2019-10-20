@@ -43,6 +43,7 @@ public class DetailActivity extends AppCompatActivity implements IWebServiceFrag
 
     Toolbar toolbar;
     View loading;
+    int idServicio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,8 @@ public class DetailActivity extends AppCompatActivity implements IWebServiceFrag
         setContentView(R.layout.activity_detail);
          toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        idServicio = getIntent().getExtras().getInt("idServicio");
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +91,7 @@ public class DetailActivity extends AppCompatActivity implements IWebServiceFrag
             String partialUrl = Constantes.WS_DETALLE;;
             String params = null;
             JSONObject body = null;
-            //params = "?SucursalId=" + idos;
+            params = "/" + idServicio;
 
             //loading.setVisibility(View.VISIBLE);
 

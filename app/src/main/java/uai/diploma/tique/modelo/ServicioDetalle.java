@@ -20,8 +20,8 @@ public class ServicioDetalle extends Servicios {
         this.account_image = jo.getString("account_image");
 
         atached_images = new ArrayList<Item>();
-        if (jo.has("atached_images") && !jo.isNull("atached_images")) {
-            JSONArray arrayItems = jo.getJSONArray("atached_images");
+        if (jo.has("atached_image") && !jo.isNull("atached_image")) {
+            JSONArray arrayItems = jo.getJSONArray("atached_image");
             for (int i = 0; i < arrayItems.length(); i++) {
                 JSONObject dataItem = arrayItems.getJSONObject(i);
                 atached_images.add(new Item(dataItem));

@@ -51,7 +51,7 @@ public class AdapterResultadoBusqueda extends RecyclerView.Adapter<AdapterResult
     }
 
     @Override
-    public void onBindViewHolder(final MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
         holder.txtNombre.setText(lservicios.get(position).getName());
         holder.txtDireccion.setText(lservicios.get(position).getAdress());
 
@@ -67,6 +67,7 @@ public class AdapterResultadoBusqueda extends RecyclerView.Adapter<AdapterResult
             public void onClick(View v) {
                 Log.d(Constantes.LOG_NAME, "se presionó el servicio");
                 Intent i = new Intent((Activity)context, DetailActivity.class);
+                i.putExtra("idServicio", lservicios.get(position).getCode());
                 context.startActivity(i);
             }
         });

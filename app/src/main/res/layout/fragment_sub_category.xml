@@ -8,6 +8,7 @@
     <include
         layout="@layout/loading_cards"
         android:visibility="visible" />
+    <include layout="@layout/error_page"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/my_recycler_view"

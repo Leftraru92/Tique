@@ -9,6 +9,7 @@
 
     <include
         layout="@layout/loading_cards" />
+    <include layout="@layout/error_page"/>
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"

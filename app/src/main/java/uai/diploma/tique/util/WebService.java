@@ -1,5 +1,6 @@
 package uai.diploma.tique.util;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.view.View;
@@ -29,7 +30,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
+import uai.diploma.tique.R;
 import uai.diploma.tique.adapter.AdapterCategorias;
 import uai.diploma.tique.fragment.CategoryFragment;
 import uai.diploma.tique.fragment.IWebServiceFragment;
@@ -40,12 +43,18 @@ import uai.diploma.tique.modelo.Servicios;
 public class WebService {
     Context context;
     IWebServiceFragment fragment;
-    RecyclerView recyclerView;
 
-    public WebService(Context context, IWebServiceFragment fragment, RecyclerView recyclerView) {
+    View rootView, loadingPanel, errorPanel;
+    TextView txtMessage;
+
+    public WebService(Context context, IWebServiceFragment fragment) {
         this.context = context;
         this.fragment = fragment;
-        this.recyclerView = recyclerView;
+
+        rootView = ((FragmentActivity)context).getWindow().getDecorView().findViewById(android.R.id.content);
+        this.loadingPanel = rootView.findViewById(R.id.loadingPanel);
+        this.errorPanel = rootView.findViewById(R.id.errorPanel);
+        this.txtMessage = rootView.findViewById(R.id.txtMessage);
     }
 
     public void callService(final String partialUrl, String params, String method, String typeResponse, JSONObject jsonBody) throws JSONException {
@@ -120,6 +129,10 @@ public class WebService {
                     @Override
                     public void onResponse(JSONArray response) {
 
+                        if (errorPanel != null) {
+                            errorPanel.setVisibility(View.GONE);
+                        }
+
                         Log.d(Constantes.LOG_NAME, "Respuesta " + partialUrl + ": " + response.toString());
                         try {
 
@@ -153,6 +166,11 @@ public class WebService {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+
+                        if (errorPanel != null) {
+                            errorPanel.setVisibility(View.GONE);
+                        }
+
                         Log.d(Constantes.LOG_NAME, "Respuesta " + partialUrl + ": " + response.toString());
                             try {
                             switch (partialUrl) {
@@ -191,32 +209,30 @@ public class WebService {
                                 final String result = new String(networkResponse.data, HttpHeaderParser.parseCharset(networkResponse.headers));
                                 Log.i(Constantes.LOG_NAME, result);
 
-                                JSONObject descriptionjson = new JSONObject(result);
+//                                JSONObject descriptionjson = new JSONObject(result);
 
                                 if (networkResponse.statusCode == 401 || networkResponse.statusCode == 403) {
-                                    description = descriptionjson.getString("Message");
+                                    //description = descriptionjson.getString("Message");
+                                    description = "Error";
                                    // Constantes.token = null;
                                 } else {
-                                    description = descriptionjson.getJSONObject("Message").getString("description");
+                                    //description = descriptionjson.getJSONObject("Message").getString("description");
+                                    description = "Error";
                                 }
 
                                 Log.i(Constantes.LOG_NAME, networkResponse.statusCode + " " + description);
-                                if (networkResponse.statusCode == 401) {
-                                    //volverAlLogin(description);
-                                }
-
                                 Log.i(Constantes.LOG_NAME, description);
-                               // if(txtMessage != null){txtMessage.setText(description);}
+                                if(txtMessage != null){txtMessage.setText(description);}
 
                             } catch (UnsupportedEncodingException e) {
                                 e.printStackTrace();
                                 Log.i(Constantes.LOG_NAME, e.getMessage());
-                               // if(txtMessage != null){txtMessage.setText(R.string.error_inesperado);}
-                            } catch (JSONException e) {
+                                if(txtMessage != null){txtMessage.setText(R.string.error_inesperado);}
+                            }/* catch (JSONException e) {
                                 e.printStackTrace();
                                 Log.i(Constantes.LOG_NAME, e.getMessage());
                               //  if(txtMessage != null){txtMessage.setText(R.string.error_inesperado);}
-                            }
+                            }*/
                         }
                         /*if (errorPanel != null) {
                             errorPanel.setVisibility(View.VISIBLE);
@@ -224,6 +240,12 @@ public class WebService {
                         if (loadingPanel != null) {
                             loadingPanel.setVisibility(View.GONE);
                         }*/
+                        if (errorPanel != null) {
+                            errorPanel.setVisibility(View.VISIBLE);
+                        }
+                        if (loadingPanel != null) {
+                            loadingPanel.setVisibility(View.GONE);
+                        }
                     }
                 };
     }

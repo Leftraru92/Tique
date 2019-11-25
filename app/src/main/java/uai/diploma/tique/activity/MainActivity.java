@@ -17,11 +17,13 @@ import uai.diploma.tique.R;
 import uai.diploma.tique.fragment.NotifFragment;
 
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView mTextMessage;
+    private View errorPanel, loading;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -59,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
     public void replaceFragment(Fragment fragment) {
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction().replace(R.id.main_fragment, fragment).commit();
+        errorPanel.setVisibility(View.GONE);
+        loading.setVisibility(View.GONE);
     }
 
 
@@ -67,7 +71,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        errorPanel = findViewById(R.id.errorPanel);
         mTextMessage = (TextView) findViewById(R.id.message);
+        loading = findViewById(R.id.loadingPanel);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }

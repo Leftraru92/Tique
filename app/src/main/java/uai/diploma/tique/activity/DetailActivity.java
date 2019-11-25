@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import uai.diploma.tique.R;
 import uai.diploma.tique.fragment.IWebServiceFragment;
+import uai.diploma.tique.listener.oclImageView;
 import uai.diploma.tique.modelo.Comentario;
 import uai.diploma.tique.modelo.Item;
 import uai.diploma.tique.modelo.ServicioDetalle;
@@ -95,7 +96,7 @@ public class DetailActivity extends AppCompatActivity implements IWebServiceFrag
 
             //loading.setVisibility(View.VISIBLE);
 
-            WebService webService = new WebService(this, this, null);
+            WebService webService = new WebService(this, this);
 
             webService.callService(partialUrl, params, Constantes.M_GET, Constantes.R_OBJECT, body);
         } catch (JSONException e) {
@@ -141,14 +142,15 @@ public class DetailActivity extends AppCompatActivity implements IWebServiceFrag
             decodedString = Base64.decode(i.getImage(), Base64.DEFAULT);
             decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 
-            ImageView imageView = new ImageView(this);
-            imageView.setId(i.getCode());
-            imageView.setPadding(2, 2, 2, 2);
-            imageView.setImageBitmap(decodedByte);
-            imageView.setClickable(true);
-            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(200,200,1.0f);
-            imageView.setLayoutParams(param);
-            layout.addView(imageView);
+            ImageView iv = new ImageView(this);
+            iv.setId(i.getCode());
+            iv.setPaddingRelative(0, 0, 8, 0);
+            iv.setAdjustViewBounds(true);
+            iv.setImageBitmap(decodedByte);
+            iv.setClickable(true);
+            iv.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            iv.setOnClickListener(new oclImageView(iv, this));
+            layout.addView(iv);
         }
 
         LinearLayout llComentarios = findViewById(R.id.llComentarios);

@@ -127,7 +127,7 @@ public class SubCategoryFragment extends Fragment implements IWebServiceFragment
 
             loading.setVisibility(View.VISIBLE);
 
-            WebService webService = new WebService(getContext(), this, recyclerView);
+            WebService webService = new WebService(getContext(), this);
 
             webService.callService(partialUrl, params, Constantes.M_GET, Constantes.R_ARRAY, body);
         } catch (JSONException e) {

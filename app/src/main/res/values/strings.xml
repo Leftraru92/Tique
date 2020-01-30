@@ -10,6 +10,11 @@
     <string name="title_comentarios">Comentarios</string>
     <string name="email">Email</string>
 
+    <string name="saludo">Hola, Visitante!</string>
+    <string name="login">Ingresar</string>
+    <string name="logout">Salir</string>
+    <string name="no_negocio">No se registraron negocios / servicios aún</string>
+
     <string name="title_activity_splash">SplashActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
@@ -27,4 +32,8 @@
     <string name="action_settings">Settings</string>
 
     <string name="error_inesperado">Error inesperado del sistema</string>
+
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_mis_negocios">Mis Negocios</string>
+    <string name="title_activity_nuevo_negocio">NuevoNegocioActivity</string>
 </resources>

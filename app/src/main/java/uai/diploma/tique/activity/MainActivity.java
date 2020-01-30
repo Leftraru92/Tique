@@ -40,23 +40,29 @@ public class MainActivity extends AppCompatActivity {
                     //mTextMessage.setText(R.string.title_dashboard);
                     fragment = new CategoryFragment();
                     replaceFragment(fragment);
+                    getSupportActionBar().setTitle(getString(R.string.title_dashboard));
                     return true;
                 case R.id.navigation_fav:
                     fragment = new FavFragment();
                     replaceFragment(fragment);
+                    getSupportActionBar().setTitle(getString(R.string.title_fav));
                     return true;
                 case R.id.navigation_notifications:
                     fragment = new NotifFragment();
                     replaceFragment(fragment);
+                    getSupportActionBar().setTitle(getString(R.string.title_notifications));
                     return true;
                 case R.id.navigation_perfil:
                     fragment = new CuentaFragment();
                     replaceFragment(fragment);
+                    getSupportActionBar().setTitle(getString(R.string.title_perfil));
                     return true;
             }
             return false;
         }
     };
+
+
 
     public void replaceFragment(Fragment fragment) {
         FragmentManager manager = getSupportFragmentManager();

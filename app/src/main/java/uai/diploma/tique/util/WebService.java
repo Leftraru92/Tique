@@ -33,6 +33,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import uai.diploma.tique.R;
+import uai.diploma.tique.activity.LoginActivity;
 import uai.diploma.tique.adapter.AdapterCategorias;
 import uai.diploma.tique.fragment.CategoryFragment;
 import uai.diploma.tique.fragment.IWebServiceFragment;
@@ -57,9 +58,8 @@ public class WebService {
         this.txtMessage = rootView.findViewById(R.id.txtMessage);
     }
 
-    public void callService(final String partialUrl, String params, String method, String typeResponse, JSONObject jsonBody) throws JSONException {
+    public void callService(final String partialUrl, String params, int methodRequest, String typeResponse, JSONObject jsonBody) throws JSONException {
 
-        int methodRequest;
         RequestQueue queue = Volley.newRequestQueue(context);
         String url = Constantes.WS_DOMINIO + partialUrl;
 
@@ -71,11 +71,6 @@ public class WebService {
 
         Log.i(Constantes.LOG_NAME, url);
 
-        if(method.equals(Constantes.M_GET))
-            methodRequest = Request.Method.GET;
-        else {
-            methodRequest = Request.Method.POST;
-        }
 
         switch (typeResponse) {
             case Constantes.R_OBJECT:
@@ -143,7 +138,6 @@ public class WebService {
                                     break;
                                 case Constantes.WS_SERVICIOS:
                                     respuestaServicios(response, context);
-                                    break;
 
                             }
 
@@ -176,6 +170,9 @@ public class WebService {
                             switch (partialUrl) {
                                 case Constantes.WS_DETALLE:
                                     respuestaDetalle(response, context);
+                                    break;
+                                case Constantes.WS_LOGIN:
+                                    LoginActivity.onResult(response);
                                     break;
                                 default:
                                     break;

@@ -36,4 +36,6 @@
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_mis_negocios">Mis Negocios</string>
     <string name="title_activity_nuevo_negocio">NuevoNegocioActivity</string>
+
+    <string name="imagenes">Imágenes</string>
 </resources>

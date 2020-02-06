@@ -41,6 +41,7 @@ import androidx.annotation.NonNull;
 import uai.diploma.tique.R;
 import uai.diploma.tique.modelo.SingletonUsuario;
 import uai.diploma.tique.util.Constantes;
+import uai.diploma.tique.util.WebService;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -90,9 +91,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
             public void onSuccess(InstanceIdResult instanceIdResult) {
                 deviceToken = instanceIdResult.getToken();
                 Log.d(Constantes.LOG_NAME, "Device token: " + deviceToken);
-                //ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                //ClipData clip = ClipData.newPlainText("device token", deviceToken);
-                //clipboard.setPrimaryClip(clip);
+                sUsuairo.setToken(deviceToken);
             }
         });
 
@@ -221,29 +220,27 @@ public class LoginActivity extends Activity implements View.OnClickListener{
         sUsuairo.setTelefono(cuenta.getPhoneNumber());
         sUsuairo.setFoto(cuenta.getPhotoUrl());
 
-        this.finish();
+        //this.finish();
 
-        //CallWebService cs = new CallWebService(this, true);
-/*
+        WebService cs = new WebService(this, null);
+
         try {
             JSONObject jsonBody = new JSONObject();
-            jsonBody.put("email", sUsuairo.getUsuario());
-            jsonBody.put("nombre", sUsuairo.getDisplayName());
-            jsonBody.put("apellido", "");
-            jsonBody.put("usuario", sUsuairo.getUsuario());
-            jsonBody.put("password", "");
+            jsonBody.put("email", sUsuairo.getEmail());
+            jsonBody.put("device_id", sUsuairo.getToken());
+            jsonBody.put("proyect_id", Constantes.PROJECT_ID);
             //jsonBody.put("Token_Disp", sUsuairo.getTokenDevice());
 
             //Busco las sucursales asignadas
-            cs.callService(Constantes.WS_LOGIN, null, Request.Method.POST, Constantes.R_OBJECT, jsonBody);
+            cs.callService(Constantes.WS_LOGIN, null, Request.Method.POST, Constantes.R_ARRAY, jsonBody);
 
         } catch (JSONException e) {
             e.printStackTrace();
             Log.i(Constantes.LOG_NAME, e.toString());
-        }*/
+        }
     }
-/*
-    public static void onResult(JSONObject response) {
+
+    public static void onResult(JSONObject response) {/*
         String mensaje = "";
         if (response.has("Message") && !response.isNull("Message")) {
             try {
@@ -258,6 +255,6 @@ public class LoginActivity extends Activity implements View.OnClickListener{
         }else{
             Snackbar.make(((LoginActivity) context).findViewById(R.id.sign_in_button), "No se pudo iniciar sesión", Snackbar.LENGTH_SHORT).show();
 
-        }
-    }*/
+        }*/
+    }
 }

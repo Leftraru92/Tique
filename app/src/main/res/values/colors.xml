@@ -13,4 +13,7 @@
     <color name="negro">#000000</color>
     <color name="transparente">#00000000</color>
     <color name="greyBackground">#EEEEEE</color>
+
+    <color name="colorPrimaryText">#212121</color>
+    <color name="colorSecondaryText">#888888</color>
 </resources>

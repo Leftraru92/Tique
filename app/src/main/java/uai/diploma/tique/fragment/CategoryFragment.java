@@ -23,6 +23,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -115,7 +117,7 @@ public class CategoryFragment extends Fragment implements IWebServiceFragment{
 
             WebService webService = new WebService(getContext(), this);
 
-            webService.callService(partialUrl, params, Constantes.M_GET, Constantes.R_ARRAY, body);
+            webService.callService(partialUrl, params, Request.Method.GET, Constantes.R_ARRAY, body);
         } catch (JSONException e) {
             e.printStackTrace();
         }

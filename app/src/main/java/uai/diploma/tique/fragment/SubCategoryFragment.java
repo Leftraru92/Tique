@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.volley.Request;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONException;
@@ -129,7 +130,7 @@ public class SubCategoryFragment extends Fragment implements IWebServiceFragment
 
             WebService webService = new WebService(getContext(), this);
 
-            webService.callService(partialUrl, params, Constantes.M_GET, Constantes.R_ARRAY, body);
+            webService.callService(partialUrl, params, Request.Method.GET, Constantes.R_ARRAY, body);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -147,7 +148,7 @@ public class SubCategoryFragment extends Fragment implements IWebServiceFragment
 
         }else{
             Log.i(Constantes.LOG_NAME, "No se encontró resultado");
-            Snackbar.make(rootview.findViewById(R.id.my_recycler_view), "No se encotraron resultados", Snackbar.LENGTH_LONG)
+            Snackbar.make(rootview.findViewById(R.id.my_recycler_view), "No se encontraron resultados", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
         }
 

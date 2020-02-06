@@ -14,11 +14,16 @@ public class Constantes {
 
     public static final int DEFAULT_TIMEOUT = 15000;
 
-    public static final String WS_DOMINIO = "https://tiqueapirest.azurewebsites.net/api/";
+    //public static final String WS_DOMINIO = "https://tiqueapirest.azurewebsites.net/api/";
+    public static final String WS_DOMINIO = "http://tique-api-dev.us-west-2.elasticbeanstalk.com/api/";
     public static final String WS_CATEGORIAS = "Categorias";
     public static final String WS_SUBCATEGORIAS = "5d87c262340000e1870a15a7";
     public static final String WS_SERVICIOS = "Servicios";
     public static final String WS_DETALLE = "ServiciosDetalle";
+    public static final String WS_LOGIN = "Login";
+
+
+    public static final String PROJECT_ID = "tique-c318b";
     public static String TOKEN = " ";
 
     public static final String I_STORE = "store";

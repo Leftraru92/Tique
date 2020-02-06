@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.os.Bundle;
 
+import com.android.volley.Request;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -98,7 +99,7 @@ public class DetailActivity extends AppCompatActivity implements IWebServiceFrag
 
             WebService webService = new WebService(this, this);
 
-            webService.callService(partialUrl, params, Constantes.M_GET, Constantes.R_OBJECT, body);
+            webService.callService(partialUrl, params, Request.Method.GET, Constantes.R_OBJECT, body);
         } catch (JSONException e) {
             e.printStackTrace();
         }

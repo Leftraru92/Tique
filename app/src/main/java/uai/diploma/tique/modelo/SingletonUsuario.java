@@ -10,10 +10,17 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GetTokenResult;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.List;
+
 import androidx.annotation.NonNull;
 import uai.diploma.tique.util.Constantes;
 
 import static android.content.Context.MODE_PRIVATE;
+import static uai.diploma.tique.modelo.Rol.getListFromJson;
 
 public class SingletonUsuario {
 
@@ -22,6 +29,7 @@ public class SingletonUsuario {
     //String email;
     String displayName, telefono, email, token;
     Uri foto;
+    List<Rol> roles;
 
     private SingletonUsuario(Context ctx) {
         this.ctx = ctx;
@@ -30,7 +38,19 @@ public class SingletonUsuario {
         this.telefono = ctx.getSharedPreferences("_", MODE_PRIVATE).getString("TELEFONO", null);
         this.email = ctx.getSharedPreferences("_", MODE_PRIVATE).getString("EMAIL", null);
         this.token = ctx.getSharedPreferences("_", MODE_PRIVATE).getString("TOKEN", null);
-        this.foto = Uri.parse(ctx.getSharedPreferences("_", MODE_PRIVATE).getString("FOTO", null));
+        String fotoString = ctx.getSharedPreferences("_", MODE_PRIVATE).getString("FOTO", null);
+        if(fotoString!=null)
+            this.foto = Uri.parse(fotoString);
+
+        String rolesString = ctx.getSharedPreferences("_", MODE_PRIVATE).getString("ROLES", null);
+        if(rolesString!= null) {
+            try {
+                JSONArray jsonArray = new JSONArray(rolesString);
+                this.roles = getListFromJson(jsonArray);
+            } catch (JSONException e) {
+                this.roles = null;
+            }
+        }
     }
 
     public static SingletonUsuario getInstance(Context ctx) {
@@ -99,5 +119,32 @@ public class SingletonUsuario {
         this.telefono = null;
         this.foto = null;
         this.token = null;
+        this.roles = null;
+    }
+
+    public void setRoles(List<Rol> roles) {
+        this.roles = roles;
+        String rolesString="";
+        JSONArray jsonArray = new JSONArray();
+        for (Rol rol: roles) {
+            jsonArray.put(rol.toJSON());
+        }
+        ctx.getSharedPreferences("_", MODE_PRIVATE).edit().putString("ROLES", jsonArray.toString()).apply();
+    }
+
+    public List<Rol> getRoles() {
+        return roles;
+    }
+
+    public boolean tieneRol(String nombreRol) {
+        boolean tiene = false;
+
+        if (getRoles() != null) {
+            for (Rol rol : getRoles()) {
+                if (nombreRol.equals(rol.getNombre()))
+                    tiene = true;
+            }
+        }
+        return tiene;
     }
 }

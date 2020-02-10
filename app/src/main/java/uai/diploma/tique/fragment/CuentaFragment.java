@@ -11,6 +11,7 @@ import uai.diploma.tique.activity.LoginActivity;
 import uai.diploma.tique.activity.MisNegociosActivity;
 import uai.diploma.tique.modelo.SingletonUsuario;
 import uai.diploma.tique.util.Constantes;
+import uai.diploma.tique.util.WebService;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.android.volley.Request;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -26,6 +28,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 /**
@@ -219,9 +224,33 @@ public class CuentaFragment extends Fragment implements View.OnClickListener {
                     });
         }
 
+        callServiceLogout();
         sUsuario.logout();
         updateUI();
 
+    }
+
+    private void callServiceLogout() {{
+
+        WebService cs = new WebService(getContext(), null);
+
+        try {
+            JSONObject jsonBody = new JSONObject();
+            jsonBody.put("email", sUsuario.getEmail());
+            jsonBody.put("device_id", sUsuario.getToken());
+
+            String params = "?email=" + sUsuario.getEmail() + "&device_id=" + sUsuario.getToken() + "&project_id=" + Constantes.PROJECT_ID;
+
+            Log.i(Constantes.LOG_NAME, "Body:" + jsonBody);
+
+            //Busco las sucursales asignadas
+            cs.callService(Constantes.WS_LOGIN, params, Request.Method.DELETE, Constantes.R_OBJECT, null);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Log.i(Constantes.LOG_NAME, e.toString());
+        }
+    }
     }
 
     @Override

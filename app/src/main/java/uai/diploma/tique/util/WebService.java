@@ -47,21 +47,29 @@ public class WebService {
 
     View rootView, loadingPanel, errorPanel;
     TextView txtMessage;
+    static int methodRequest;
 
     public WebService(Context context, IWebServiceFragment fragment) {
         this.context = context;
         this.fragment = fragment;
 
-        rootView = ((FragmentActivity)context).getWindow().getDecorView().findViewById(android.R.id.content);
-        this.loadingPanel = rootView.findViewById(R.id.loadingPanel);
-        this.errorPanel = rootView.findViewById(R.id.errorPanel);
-        this.txtMessage = rootView.findViewById(R.id.txtMessage);
+        if(fragment!= null) {
+            rootView = ((FragmentActivity) context).getWindow().getDecorView().findViewById(android.R.id.content);
+        }else{
+            rootView = ((Activity) context).getWindow().getDecorView().findViewById(android.R.id.content);
+        }
+            this.loadingPanel = rootView.findViewById(R.id.loadingPanel);
+            this.errorPanel = rootView.findViewById(R.id.errorPanel);
+            this.txtMessage = rootView.findViewById(R.id.txtMessage);
+
     }
 
     public void callService(final String partialUrl, String params, int methodRequest, String typeResponse, JSONObject jsonBody) throws JSONException {
 
         RequestQueue queue = Volley.newRequestQueue(context);
         String url = Constantes.WS_DOMINIO + partialUrl;
+
+        this.methodRequest = methodRequest;
 
         if (params != null) {
             url = url + params;
@@ -75,9 +83,12 @@ public class WebService {
         switch (typeResponse) {
             case Constantes.R_OBJECT:
 
+                //Si la accion es logout, no le pondo error listener
+                Response.ErrorListener errorListener = (partialUrl.equals(Constantes.WS_LOGIN) && methodRequest == Request.Method.DELETE) ? null: newErrorListener();
+
                 JsonObjectRequest stringRequestPost = new JsonObjectRequest(methodRequest, url,
                         jsonBody,
-                        jsonObjectListener(partialUrl, context), newErrorListener()) {
+                        jsonObjectListener(partialUrl, context), errorListener) {
 
                    /* @Override
                     public Map<String, String> getHeaders() throws AuthFailureError {
@@ -172,7 +183,14 @@ public class WebService {
                                     respuestaDetalle(response, context);
                                     break;
                                 case Constantes.WS_LOGIN:
-                                    LoginActivity.onResult(response);
+                                    switch (methodRequest){
+                                        case Request.Method.POST:
+                                            LoginActivity.onResult(response);
+                                            break;
+                                        case Request.Method.DELETE:
+                                            Log.i(Constantes.LOG_NAME, response.toString());
+                                            break;
+                                    }
                                     break;
                                 default:
                                     break;

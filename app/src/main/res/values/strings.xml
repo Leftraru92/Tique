@@ -8,6 +8,7 @@
     <string name="title_cuenta">Cuenta</string>
     <string name="title_imagenes">Imágenes</string>
     <string name="title_comentarios">Comentarios</string>
+    <string name="title_turnos">Turnos</string>
     <string name="email">Email</string>
 
     <string name="saludo">Hola, Visitante!</string>
@@ -37,5 +38,9 @@
     <string name="title_activity_mis_negocios">Mis Negocios</string>
     <string name="title_activity_nuevo_negocio">NuevoNegocioActivity</string>
 
-    <string name="imagenes">Imágenes</string>
+    <string name="imagenes">Adjuntar Imágenes</string>
+
+    <string name="selec_opt">Seleccione una opción</string>
+    <string name="selec_gale">Seleccionar desde Galería</string>
+    <string name="cap_foto">Capturar una foto</string>
 </resources>

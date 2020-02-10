@@ -5,6 +5,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 public class Constantes {
 
     public static final String LOG_NAME = "LOG_TIQUE";
+    public static final String IMAGE_DIRECTORY = "/TIQUE";
 
     public static final String M_POST = "POST";
     public static final String M_GET = "GET";
@@ -33,6 +34,8 @@ public class Constantes {
     public static final String I_CAFE = "cafe";
     public static final String I_PIZZA = "pizza";
     public static final String I_TICKET = "ticket";
+
+    public static String LastPhotoUri = "";
 
     public static GoogleSignInClient GOOGLE_SIGN_IN = null;
     public static String token = "";

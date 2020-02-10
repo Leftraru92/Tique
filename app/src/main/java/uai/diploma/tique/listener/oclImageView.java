@@ -1,5 +1,6 @@
 package uai.diploma.tique.listener;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
@@ -26,7 +27,7 @@ public class oclImageView implements View.OnClickListener {
     public void onClick(View v) {
 
         AlertDialog.Builder mBuilder = new AlertDialog.Builder(context);
-        View mView = ((DetailActivity) context).getLayoutInflater().inflate(R.layout.dialog_image_fullsize, null);
+        View mView = ((Activity) context).getLayoutInflater().inflate(R.layout.dialog_image_fullsize, null);
         PhotoView photoView = mView.findViewById(R.id.imageView);
         photoView.setImageDrawable(imageView.getDrawable());
         mBuilder.setView(mView);

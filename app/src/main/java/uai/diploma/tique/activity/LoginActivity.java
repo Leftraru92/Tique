@@ -34,11 +34,16 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import androidx.annotation.NonNull;
 import uai.diploma.tique.R;
+import uai.diploma.tique.modelo.Rol;
 import uai.diploma.tique.modelo.SingletonUsuario;
 import uai.diploma.tique.util.Constantes;
 import uai.diploma.tique.util.WebService;
@@ -55,7 +60,8 @@ public class LoginActivity extends Activity implements View.OnClickListener{
     String deviceToken;
     SignInButton signInButton;
     private static final int RC_SIGN_IN = 1;
-    SingletonUsuario sUsuairo;
+    static SingletonUsuario sUsuairo;
+    static Context ctx;
 
 
     @Override
@@ -69,6 +75,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
             actionBar.hide();
         }
 
+        ctx = this;
         sUsuairo = SingletonUsuario.getInstance(getApplicationContext());
 
         fabClose = findViewById(R.id.fabClose);
@@ -190,9 +197,9 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                     .addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
                         public void onComplete(@NonNull Task<GetTokenResult> task) {
                             if (task.isSuccessful()) {
-                                sUsuairo.setToken(task.getResult().getToken());
+                                //sUsuairo.setToken(task.getResult().getToken());
                             } else {
-                                sUsuairo.setToken(null);
+                                //sUsuairo.setToken(null);
                             }
 
                             Log.i(Constantes.LOG_NAME, "Cuenta seleccionada " + account.getDisplayName());
@@ -229,10 +236,13 @@ public class LoginActivity extends Activity implements View.OnClickListener{
             jsonBody.put("email", sUsuairo.getEmail());
             jsonBody.put("device_id", sUsuairo.getToken());
             jsonBody.put("proyect_id", Constantes.PROJECT_ID);
-            //jsonBody.put("Token_Disp", sUsuairo.getTokenDevice());
+            jsonBody.put("nombre", sUsuairo.getDisplayName());
+            jsonBody.put("telefono", (sUsuairo.getTelefono()==null)?"0":sUsuairo.getTelefono());
+
+            Log.i(Constantes.LOG_NAME, "Body:" + jsonBody);
 
             //Busco las sucursales asignadas
-            cs.callService(Constantes.WS_LOGIN, null, Request.Method.POST, Constantes.R_ARRAY, jsonBody);
+            cs.callService(Constantes.WS_LOGIN, null, Request.Method.POST, Constantes.R_OBJECT, jsonBody);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -240,21 +250,24 @@ public class LoginActivity extends Activity implements View.OnClickListener{
         }
     }
 
-    public static void onResult(JSONObject response) {/*
+    public static void onResult(JSONObject response) {
+
+
+
         String mensaje = "";
-        if (response.has("Message") && !response.isNull("Message")) {
+        if (response.has("roles") && !response.isNull("roles")) {
+
             try {
-                mensaje = response.getString("Message");
+                sUsuairo.setRoles(Rol.getListFromJson((JSONArray) response.get("roles")));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-        }
-        if(mensaje.equals(Constantes.MSG_OK)) {
-            Toast.makeText(context, "Bienvenido " + sUsuairo.getDisplayName(), Toast.LENGTH_LONG).show();
-            ((LoginActivity) context).finish();
-        }else{
-            Snackbar.make(((LoginActivity) context).findViewById(R.id.sign_in_button), "No se pudo iniciar sesión", Snackbar.LENGTH_SHORT).show();
 
-        }*/
+            Toast.makeText(ctx, "Bienvenido " + sUsuairo.getDisplayName(), Toast.LENGTH_LONG).show();
+            ((LoginActivity) ctx).finish();
+
+        }else{
+            Snackbar.make(((LoginActivity) ctx).findViewById(R.id.sign_in_button), "No se pudo iniciar sesión", Snackbar.LENGTH_SHORT).show();
+        }
     }
 }

@@ -34,9 +34,9 @@ public class NuevoNegocioActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        findViewById(R.id.fabFotoPortada).setOnClickListener(new oclAdjuntarImagen(this, GALLERY_PO, CAMERA_PO));
-        findViewById(R.id.fabFotoPerfil).setOnClickListener(new oclAdjuntarImagen(this, GALLERY_PE, CAMERA_PE));
-        findViewById(R.id.btnCamera).setOnClickListener(new oclAdjuntarImagen(this, GALLERY_IA, CAMERA_IA));
+        findViewById(R.id.fabFotoPortada).setOnClickListener(new oclAdjuntarImagen(this, GALLERY_PO, CAMERA_PO, false));
+        findViewById(R.id.fabFotoPerfil).setOnClickListener(new oclAdjuntarImagen(this, GALLERY_PE, CAMERA_PE, false));
+        findViewById(R.id.btnCamera).setOnClickListener(new oclAdjuntarImagen(this, GALLERY_IA, CAMERA_IA, true));
         llImagenes = findViewById(R.id.llImagenes);
         tvCountImage = findViewById(R.id.tvCountImage);
     }

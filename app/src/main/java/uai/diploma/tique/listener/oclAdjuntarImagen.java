@@ -35,11 +35,13 @@ public class oclAdjuntarImagen implements View.OnClickListener {
     //private int GALLERY = 1, CAMERA = 2;
     private static final int MY_CAMERA_REQUEST_CODE = 100;
     String currentPhotoPath;
+    Boolean multiple;
 
-    public oclAdjuntarImagen(Context context, int id_galeria, int id_camara) {
+    public oclAdjuntarImagen(Context context, int id_galeria, int id_camara, boolean multiple) {
         this.context = context;
         this.id_galeria = id_galeria;
         this.id_camara = id_camara;
+        this.multiple = multiple;
     }
 
     @Override
@@ -86,7 +88,7 @@ public class oclAdjuntarImagen implements View.OnClickListener {
     public void choosePhotoFromGallary() {
         Intent galleryIntent = new Intent(Intent.ACTION_PICK,
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        galleryIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+        galleryIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, multiple);
         try {
             ((NuevoNegocioActivity) context).startActivityForResult(galleryIntent, id_galeria);
         } catch (ActivityNotFoundException e) {

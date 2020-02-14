@@ -8,8 +8,13 @@
     <string name="title_cuenta">Cuenta</string>
     <string name="title_imagenes">Imágenes</string>
     <string name="title_comentarios">Comentarios</string>
-    <string name="title_turnos">Turnos</string>
+    <string name="title_turnos">Reservas</string>
+    <string name="subtitle_diasturnos">Días disponibles para reserva</string>
+    <string name="subtitle_horariosturnos">Rango horario disponibles para reserva</string>
+    <string name="subtitle_cantTurnos">Cantidad de turnos simultaneos</string>
     <string name="email">Email</string>
+    <string name="desde">Desde</string>
+    <string name="hasta">Hasta</string>
 
     <string name="saludo">Hola, Visitante!</string>
     <string name="login">Ingresar</string>
@@ -34,9 +39,9 @@
 
     <string name="error_inesperado">Error inesperado del sistema</string>
 
-    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_login">Login</string>
     <string name="title_activity_mis_negocios">Mis Negocios</string>
-    <string name="title_activity_nuevo_negocio">NuevoNegocioActivity</string>
+    <string name="title_activity_nuevo_negocio">Nuevo Negocio</string>
 
     <string name="imagenes">Adjuntar Imágenes</string>
 

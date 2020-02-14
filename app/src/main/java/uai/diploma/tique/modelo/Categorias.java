@@ -3,12 +3,15 @@ package uai.diploma.tique.modelo;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
+
 public class Categorias{
 
     private int code;
     private String description;
     private String icon;
     private boolean isSon;
+    private List<Categorias> subCategorias;
 
     public Categorias(JSONObject jo) throws JSONException {
         this.code = jo.getInt("code");
@@ -31,4 +34,11 @@ public class Categorias{
 
     public boolean isSon() { return isSon; }
 
+    public List<Categorias> getSubCategorias() {
+        return subCategorias;
+    }
+
+    public void setSubCategorias(List<Categorias> subCategorias) {
+        this.subCategorias = subCategorias;
+    }
 }

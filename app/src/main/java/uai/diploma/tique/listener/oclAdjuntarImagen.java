@@ -113,7 +113,7 @@ public class oclAdjuntarImagen implements View.OnClickListener {
             if (photoFile != null) {
 
                 Uri photoURI = FileProvider.getUriForFile(context,
-                        "com.edensa.fileprovider",
+                        "uai.diploma.fileprovider",
                         photoFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 takePictureIntent.putExtra(MediaStore.EXTRA_SCREEN_ORIENTATION, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);

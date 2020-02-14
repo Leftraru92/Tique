@@ -27,7 +27,7 @@
                 android:id="@+id/grupoPortada"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                android:background="@color/colorPrimary"
+                android:background="@color/colorPrimaryLigth"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -51,8 +51,19 @@
                     android:id="@+id/imgPortada"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+                    android:scaleType="centerCrop"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imgFondo"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
                     android:scaleType="centerInside"
-                    app:layout_constraintBottom_toTopOf="@+id/guideline4"
+                    app:layout_constraintBottom_toBottomOf="@+id/guideline4"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/guideline5"
@@ -89,7 +100,141 @@
                     app:srcCompat="@drawable/ic_photo_camera_black_24dp"
                     app:tint="@color/white" />
 
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fabBorrarFotoPortada"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:clickable="true"
+                    app:backgroundTint="@color/design_default_color_error"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/fabFotoPortada"
+                    app:srcCompat="@drawable/ic_delete_black_24dp"
+                    app:tint="@color/white"
+                    android:visibility="gone"/>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardCategoria"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="3dp"
+                app:contentPadding="16dp"
+                app:contentPaddingBottom="16dp"
+                app:contentPaddingTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/grupoPortada">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/grupoCategoria"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/tvCategoria"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/text_margin"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:paddingLeft="16dp"
+                        android:text="Categoría"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/grupoCat"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:foregroundGravity="center_vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvCategoria">
+
+                        <com.google.android.material.button.MaterialButtonToggleGroup
+                            android:id="@+id/tbCategoria"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:foregroundGravity="center_horizontal"
+                            android:gravity="center"
+                            app:checkedButton="@+id/mbNegocio"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:singleSelection="true">
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/mbNegocio"
+                                style="?attr/materialButtonOutlinedStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="NEGOCIO" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/mbServicio"
+                                style="?attr/materialButtonOutlinedStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="SERVICIO" />
+
+
+                        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/tvSubCategoria"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/text_margin"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:paddingLeft="16dp"
+                        android:text="Subcategoría"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/grupoCat" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/tbSubcategoria"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="52dp"
+                        android:layout_marginTop="16dp"
+                        android:text="SELECCIONE"
+                        app:cornerRadius="6dp"
+                        app:icon="@drawable/ic_comment_black_24dp"
+                        app:iconGravity="textStart"
+                        app:iconPadding="24dp"
+                        app:iconTint="@color/colorPrimaryDark"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvSubCategoria" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
 
 
             <androidx.cardview.widget.CardView
@@ -105,8 +250,9 @@
                 app:contentPaddingBottom="16dp"
                 app:contentPaddingTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/grupoPortada">
+                app:layout_constraintTop_toBottomOf="@+id/cardCategoria">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/grupoTitulo"
@@ -134,23 +280,36 @@
                         android:id="@+id/fabFotoPerfil"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
                         android:clickable="true"
                         app:backgroundTint="@color/colorAccent"
-                        app:layout_constraintBottom_toBottomOf="@+id/profile_image"
-                        app:layout_constraintEnd_toEndOf="@+id/profile_image"
-                        app:layout_constraintStart_toEndOf="@+id/profile_image"
+                        app:layout_constraintBottom_toBottomOf="@+id/imgPerfil"
+                        app:layout_constraintEnd_toEndOf="@+id/imgPerfil"
+                        app:layout_constraintStart_toEndOf="@+id/imgPerfil"
                         app:srcCompat="@drawable/ic_photo_camera_black_24dp"
-                        app:tint="@color/white"/>
+                        app:tint="@color/white" />
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/fabBorrarFotoPerfil"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:clickable="true"
+                        android:visibility="gone"
+                        app:backgroundTint="@color/design_default_color_error"
+                        app:layout_constraintBottom_toBottomOf="@+id/imgPerfil"
+                        app:layout_constraintEnd_toStartOf="@+id/imgPerfil"
+                        app:layout_constraintStart_toStartOf="@+id/imgPerfil"
+                        app:srcCompat="@drawable/ic_delete_black_24dp"
+                        app:tint="@color/white" />
 
                     <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                        android:id="@+id/profile_image"
+                        android:id="@+id/imgPerfil"
                         android:layout_width="120dp"
                         android:layout_height="120dp"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="8dp"
-                        android:src="@mipmap/ic_launcher_round"
+                        android:src="@drawable/perfil"
                         app:civ_border_color="@color/colorPrimaryDark"
                         app:civ_border_width="3dp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -171,7 +330,7 @@
                         app:helperText="Nombre del Negocio"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/profile_image">
+                        app:layout_constraintTop_toBottomOf="@+id/imgPerfil">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/tvNombre"
@@ -348,11 +507,10 @@
                                 android:id="@+id/tvDesc"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:inputType="textMultiLine"/>
+                                android:inputType="textMultiLine" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -363,7 +521,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 app:cardCornerRadius="5dp"
                 app:cardElevation="3dp"
@@ -414,10 +572,11 @@
 
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardTurnos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="5dp"
@@ -446,18 +605,340 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <LinearLayout
-                        android:id="@+id/llComentarios"
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/grupoDiasTurnos"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="16dp"
-                        android:orientation="vertical"
-                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/txtComentarios">
+                        app:layout_constraintTop_toBottomOf="@+id/txtTurnos">
 
+                        <TextView
+                            android:id="@+id/txtDiasTurnos"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/text_margin"
+                            android:text="@string/subtitle_diasturnos"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="14sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                    </LinearLayout>
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="16dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/txtDiasTurnos">
+
+                            <com.google.android.material.button.MaterialButtonToggleGroup
+                                android:id="@+id/toggle_button_group"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:foregroundGravity="center_horizontal"
+                                android:gravity="center"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <com.google.android.material.button.MaterialButton
+                                    style="?attr/materialButtonOutlinedStyle"
+                                    android:layout_width="48dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="L" />
+
+                                <com.google.android.material.button.MaterialButton
+                                    style="?attr/materialButtonOutlinedStyle"
+                                    android:layout_width="48dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="M" />
+
+                                <com.google.android.material.button.MaterialButton
+                                    style="?attr/materialButtonOutlinedStyle"
+                                    android:layout_width="48dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="X" />
+
+                                <com.google.android.material.button.MaterialButton
+                                    style="?attr/materialButtonOutlinedStyle"
+                                    android:layout_width="48dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="J" />
+
+                                <com.google.android.material.button.MaterialButton
+                                    style="?attr/materialButtonOutlinedStyle"
+                                    android:layout_width="48dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="V" />
+
+                                <com.google.android.material.button.MaterialButton
+                                    style="?attr/materialButtonOutlinedStyle"
+                                    android:layout_width="48dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="S" />
+
+                                <com.google.android.material.button.MaterialButton
+                                    style="?attr/materialButtonOutlinedStyle"
+                                    android:layout_width="48dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="D" />
+
+                            </com.google.android.material.button.MaterialButtonToggleGroup>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/grupoHorairosTurnos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/grupoDiasTurnos">
+
+                        <TextView
+                            android:id="@+id/txtHorariosReserva"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/text_margin"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/subtitle_horariosturnos"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="14sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <LinearLayout
+                            android:id="@+id/grupoHoraDesde"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/txtHorariosReserva">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/text_margin"
+                                android:text="@string/desde"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                                android:textSize="12sp" />
+
+                            <SeekBar
+                                android:id="@+id/sbDesde"
+                                style="@style/Widget.AppCompat.SeekBar.Discrete"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:max="23"
+                                android:progress="8" />
+
+                            <TextView
+                                android:id="@+id/tvHoraDesde"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/text_margin"
+                                android:text="8:00"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/grupoHoraHasta"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:orientation="horizontal"
+                            android:gravity="center"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/grupoHoraDesde">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/text_margin"
+                                android:text="@string/hasta"
+                                android:textSize="12sp"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+                            <SeekBar
+                                android:id="@+id/sbHasta"
+                                style="@style/Widget.AppCompat.SeekBar.Discrete"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:max="23"
+                                android:progress="18"
+                                />
+
+                            <TextView
+                                android:id="@+id/tvHoraHasta"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/text_margin"
+                                android:text="18:00"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                                android:textSize="12sp" />
+
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/grupoDuracionTurnos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/grupoHorairosTurnos">
+
+                        <TextView
+                            android:id="@+id/txtDuracionTurnos"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/text_margin"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/subtitle_diasturnos"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="14sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <HorizontalScrollView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:foregroundGravity="center_vertical"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/txtDuracionTurnos">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="16dp"
+                                android:foregroundGravity="center_vertical">
+
+                                <com.google.android.material.button.MaterialButtonToggleGroup
+                                    android:id="@+id/tbDuracionTurno"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:layout_marginBottom="8dp"
+                                    android:foregroundGravity="center_horizontal"
+                                    android:gravity="center"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:singleSelection="true">
+
+                                    <com.google.android.material.button.MaterialButton
+                                        style="?attr/materialButtonOutlinedStyle"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="15 min." />
+
+                                    <com.google.android.material.button.MaterialButton
+                                        style="?attr/materialButtonOutlinedStyle"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="30 min." />
+
+                                    <com.google.android.material.button.MaterialButton
+                                        style="?attr/materialButtonOutlinedStyle"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="45 min." />
+
+                                    <com.google.android.material.button.MaterialButton
+                                        style="?attr/materialButtonOutlinedStyle"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="1 hora" />
+
+                                    <com.google.android.material.button.MaterialButton
+                                        style="?attr/materialButtonOutlinedStyle"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="2 horas" />
+
+                                    <com.google.android.material.button.MaterialButton
+                                        style="?attr/materialButtonOutlinedStyle"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="3 horas" />
+
+                                    <com.google.android.material.button.MaterialButton
+                                        style="?attr/materialButtonOutlinedStyle"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="4 horas" />
+
+                                    <com.google.android.material.button.MaterialButton
+                                        style="?attr/materialButtonOutlinedStyle"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Todo el día" />
+
+                                </com.google.android.material.button.MaterialButtonToggleGroup>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </HorizontalScrollView>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/grupoCantidadTurnos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/grupoDuracionTurnos">
+
+                        <TextView
+                            android:id="@+id/txtCantidadTurnos"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/text_margin"
+                            android:layout_marginTop="8dp"
+                            android:text="@string/subtitle_cantTurnos"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="14sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/tilCantTurno"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="16dp"
+                            android:text="1"
+                            app:counterEnabled="true"
+                            app:counterMaxLength="3"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/txtCantidadTurnos">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/tvCantTurno"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="number" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 

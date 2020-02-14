@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
+import android.media.Image;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
@@ -38,12 +39,14 @@ public class moduloProcesarImagen {
     private Context context;
     LinearLayout llImagenes;
     TextView tvCountImage;
+    ImageView imgSelect;
 
-    public void procesarImagen(int requestCode, int resultCode, Intent data, Context ctx, LinearLayout llImagenes, TextView tvCountImage) {
+    public void procesarImagen(int requestCode, int resultCode, Intent data, Context ctx, LinearLayout llImagenes, TextView tvCountImage, ImageView imgSelect) {
 
         this.context = ctx;
         this.llImagenes = llImagenes;
         this.tvCountImage = tvCountImage;
+        this.imgSelect = imgSelect;
 
         if (resultCode == RESULT_CANCELED) {
             return;
@@ -143,26 +146,45 @@ public class moduloProcesarImagen {
 
     private void addImageToLayout(Bitmap bitmap, String fotoPath) {
 
-        bitmap = getResizedBitmap(bitmap, 1024);
+        if(llImagenes!= null) {
 
-        ImageView iv = new ImageView(context);
-        iv.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        //iv.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-        iv.setPaddingRelative(0, 0, 8, 0);
-        iv.setAdjustViewBounds(true);
-        iv.setImageBitmap(bitmap);
-        iv.setTag(fotoPath);
+            bitmap = getResizedBitmap(bitmap, 1024);
+
+            ImageView iv = new ImageView(context);
+            iv.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            //iv.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+            iv.setPaddingRelative(0, 0, 8, 0);
+            iv.setAdjustViewBounds(true);
+            iv.setImageBitmap(bitmap);
+            iv.setTag(fotoPath);
+            TypedValue outValue = new TypedValue();
+            //Seleccionable
+            context.getTheme().resolveAttribute(android.R.attr.selectableItemBackground, outValue, true);
+            iv.setBackgroundResource(outValue.resourceId);
+            //On click delete
+            iv.setOnClickListener(new oclImageView(iv, context));
+            iv.setOnLongClickListener(new olclImageView(context, iv, tvCountImage, llImagenes));
+            llImagenes.addView(iv);
+
+            if (tvCountImage != null)
+                tvCountImage.setText(llImagenes.getChildCount() + " Adjuntos");
+        }else{
+            addImageToImageView(bitmap, fotoPath);
+        }
+    }
+
+    private void addImageToImageView(Bitmap bitmap, String fotoPath) {
+
+        bitmap = getResizedBitmap(bitmap, 1024);
+        imgSelect.setImageBitmap(bitmap);
+        imgSelect.setTag(fotoPath);
         TypedValue outValue = new TypedValue();
         //Seleccionable
         context.getTheme().resolveAttribute(android.R.attr.selectableItemBackground, outValue, true);
-        iv.setBackgroundResource(outValue.resourceId);
+        imgSelect.setBackgroundResource(outValue.resourceId);
         //On click delete
-        iv.setOnClickListener(new oclImageView(iv, context));
-        iv.setOnLongClickListener(new olclImageView(context, iv, tvCountImage, llImagenes));
-        llImagenes.addView(iv);
+        imgSelect.setOnClickListener(new oclImageView(imgSelect, context));
 
-        if (tvCountImage != null)
-            tvCountImage.setText(llImagenes.getChildCount() + " Adjuntos");
     }
 
     public Bitmap getResizedBitmap(Bitmap image, int maxSize) {

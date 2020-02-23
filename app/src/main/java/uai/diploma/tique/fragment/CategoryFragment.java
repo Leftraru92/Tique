@@ -14,6 +14,7 @@ import uai.diploma.tique.R;
 import uai.diploma.tique.activity.MainActivity;
 import uai.diploma.tique.adapter.AdapterCategorias;
 import uai.diploma.tique.modelo.Categorias;
+import uai.diploma.tique.modelo.SingletonCategorias;
 import uai.diploma.tique.util.Constantes;
 import uai.diploma.tique.util.WebService;
 
@@ -39,14 +40,14 @@ import java.util.ArrayList;
  * Use the {@link CategoryFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CategoryFragment extends Fragment implements IWebServiceFragment{
+public class CategoryFragment extends Fragment{
 
     private OnFragmentInteractionListener mListener;
     private RecyclerView.LayoutManager layoutManager;
     private static RecyclerView recyclerView;
     public View rootview;
     View loading;
-    ArrayList<Categorias>  lcategorias;
+    //ArrayList<Categorias>  lcategorias;
 
     public CategoryFragment() {
         // Required empty public constructor
@@ -80,7 +81,9 @@ public class CategoryFragment extends Fragment implements IWebServiceFragment{
         loading = getActivity().findViewById(R.id.loadingPanel);
         //loading = rootview.findViewById(R.id.loadingPanel);
 
-        getData();
+        //getData();
+        cargarCategorias();
+
 
         return rootview;
     }
@@ -103,7 +106,7 @@ public class CategoryFragment extends Fragment implements IWebServiceFragment{
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-
+/*
     private void getData() {
 
         try {
@@ -121,15 +124,17 @@ public class CategoryFragment extends Fragment implements IWebServiceFragment{
         } catch (JSONException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
-    public void onWebServiceResult(ArrayList<?> categorias){
-        this.lcategorias = (ArrayList<Categorias>)categorias;
+    public void cargarCategorias(){
+
+        SingletonCategorias cat = SingletonCategorias.getInstance();
+
         RecyclerView.Adapter<AdapterCategorias.MyViewHolder> adapter;
 
-        if (lcategorias.size() > 0) {
-            Log.i(Constantes.LOG_NAME, "Se encontraron " + lcategorias.size() + " resultados");
-            adapter = new AdapterCategorias(getContext(), lcategorias);
+        if (cat.getCategorias().size() > 0) {
+            Log.i(Constantes.LOG_NAME, "Se encontraron " + cat.getCategorias().size() + " resultados");
+            adapter = new AdapterCategorias(getContext(), cat.getCategorias());
             recyclerView.setAdapter(adapter);
 
         }else{
@@ -139,8 +144,4 @@ public class CategoryFragment extends Fragment implements IWebServiceFragment{
         loading.setVisibility(View.GONE);
     }
 
-    @Override
-    public void onWebServiceResult(Object lista) {
-
-    }
 }

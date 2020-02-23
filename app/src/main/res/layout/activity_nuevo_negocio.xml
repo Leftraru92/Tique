@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/btnEnviar"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -185,7 +185,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="NEGOCIO" />
+                                android:text="NEGOCIO"
+                                />
 
                             <com.google.android.material.button.MaterialButton
                                 android:id="@+id/mbServicio"
@@ -224,13 +225,26 @@
                         android:layout_marginTop="16dp"
                         android:text="SELECCIONE"
                         app:cornerRadius="6dp"
-                        app:icon="@drawable/ic_comment_black_24dp"
                         app:iconGravity="textStart"
                         app:iconPadding="24dp"
                         app:iconTint="@color/colorPrimaryDark"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tvSubCategoria" />
+
+                    <TextView
+                        android:id="@+id/tvErrorSubCat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="@string/error_subcat"
+                        android:textColor="@color/design_default_color_error"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tbSubcategoria" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -804,7 +818,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/text_margin"
                             android:layout_marginTop="8dp"
-                            android:text="@string/subtitle_diasturnos"
+                            android:text="@string/subtitle_duracionturnos"
                             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="14sp"
@@ -812,6 +826,7 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <HorizontalScrollView
+                            android:id="@+id/scrollDuracion"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:foregroundGravity="center_vertical"
@@ -893,6 +908,20 @@
 
                         </HorizontalScrollView>
 
+                        <TextView
+                            android:id="@+id/tvErrorDuracion"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:text="@string/error_duracion"
+                            android:textColor="@color/design_default_color_error"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/scrollDuracion" />
+
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -947,7 +976,8 @@
 
     </ScrollView>
 
-    <Button
+    <!--
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnEnviar"
         android:layout_width="0dp"
         android:layout_height="60dp"
@@ -957,5 +987,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scroll" />
+
+        -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

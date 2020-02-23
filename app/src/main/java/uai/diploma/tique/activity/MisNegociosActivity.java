@@ -4,13 +4,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.ConditionVariable;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import uai.diploma.tique.R;
+import uai.diploma.tique.modelo.SingletonCategorias;
 import uai.diploma.tique.modelo.SingletonUsuario;
 
 public class MisNegociosActivity extends AppCompatActivity {
@@ -22,6 +25,7 @@ public class MisNegociosActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mis_negocios);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ctx = this;
         fab = findViewById(R.id.fab);
@@ -31,6 +35,14 @@ public class MisNegociosActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(SingletonUsuario.getInstance(ctx).tieneRol("crear_negocio")) {
 
+                    //Si las categorias no estan en memoria llamo al Splash
+                    if(SingletonCategorias.getInstance().getCategorias()==null){
+                        Intent i = new Intent(ctx, SplashActivity.class);
+                        ctx.startActivity(i);
+                        Toast.makeText(ctx, "Cargando categorías...", Toast.LENGTH_LONG).show();
+                        ((MisNegociosActivity)ctx).finish();
+                    }
+
                     Intent i = new Intent(ctx, NuevoNegocioActivity.class);
                     ctx.startActivity(i);
                 }else{
@@ -39,5 +51,17 @@ public class MisNegociosActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
 }

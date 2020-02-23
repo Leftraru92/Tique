@@ -11,6 +11,7 @@
     <string name="title_turnos">Reservas</string>
     <string name="subtitle_diasturnos">Días disponibles para reserva</string>
     <string name="subtitle_horariosturnos">Rango horario disponibles para reserva</string>
+    <string name="subtitle_duracionturnos">Duración del turno</string>
     <string name="subtitle_cantTurnos">Cantidad de turnos simultaneos</string>
     <string name="email">Email</string>
     <string name="desde">Desde</string>
@@ -38,10 +39,12 @@
     <string name="action_settings">Settings</string>
 
     <string name="error_inesperado">Error inesperado del sistema</string>
+    <string name="error_subcat">Debe seleccionar una subcategoría</string>
+    <string name="error_duracion">Debe seleccionar una duración</string>
 
     <string name="title_activity_login">Login</string>
-    <string name="title_activity_mis_negocios">Mis Negocios</string>
-    <string name="title_activity_nuevo_negocio">Nuevo Negocio</string>
+    <string name="title_activity_mis_negocios">Mis Negocios y Servicios</string>
+    <string name="title_activity_nuevo_negocio">Nuevo Negocio/ Servicio</string>
 
     <string name="imagenes">Adjuntar Imágenes</string>
 

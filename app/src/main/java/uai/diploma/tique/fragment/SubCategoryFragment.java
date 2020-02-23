@@ -27,10 +27,11 @@ import uai.diploma.tique.R;
 import uai.diploma.tique.activity.MainActivity;
 import uai.diploma.tique.adapter.AdapterCategorias;
 import uai.diploma.tique.modelo.Categorias;
+import uai.diploma.tique.modelo.SingletonCategorias;
 import uai.diploma.tique.util.Constantes;
 import uai.diploma.tique.util.WebService;
 
-public class SubCategoryFragment extends Fragment implements IWebServiceFragment{
+public class SubCategoryFragment extends Fragment{
 
     private static final String P_CATEGORIA = "CodeCat";
     private static int codeCat;
@@ -82,7 +83,8 @@ public class SubCategoryFragment extends Fragment implements IWebServiceFragment
 
         loading = rootview.findViewById(R.id.loadingPanel);
 
-        getData();
+        //getData();
+        cargarSubCategorias();
 
         return rootview;
     }
@@ -117,33 +119,16 @@ public class SubCategoryFragment extends Fragment implements IWebServiceFragment
         void onFragmentInteraction(Uri uri);
     }
 
-    private void getData() {
 
-        try {
+    public void cargarSubCategorias(){
 
-            String partialUrl = Constantes.WS_CATEGORIAS;;
-            String params = null;
-            JSONObject body = null;
-            params = "/" + codeCat;
+        SingletonCategorias cat = SingletonCategorias.getInstance();
 
-            loading.setVisibility(View.VISIBLE);
-
-            WebService webService = new WebService(getContext(), this);
-
-            webService.callService(partialUrl, params, Request.Method.GET, Constantes.R_ARRAY, body);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void onWebServiceResult(ArrayList<?> categorias) {
-        this.lcategorias = (ArrayList<Categorias>)categorias;
         RecyclerView.Adapter<AdapterCategorias.MyViewHolder> adapter;
 
-        if (lcategorias.size() > 0) {
-            Log.i(Constantes.LOG_NAME, "Se encontraron " + lcategorias.size() + " resultados");
-            adapter = new AdapterCategorias(getContext(), lcategorias);
+        if (cat.getCategorias(codeCat).size() > 0) {
+            Log.i(Constantes.LOG_NAME, "Se encontraron " + cat.getCategorias(codeCat).size() + " resultados");
+            adapter = new AdapterCategorias(getContext(), cat.getCategorias(codeCat));
             recyclerView.setAdapter(adapter);
 
         }else{
@@ -153,10 +138,6 @@ public class SubCategoryFragment extends Fragment implements IWebServiceFragment
         }
 
         loading.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void onWebServiceResult(Object lista) {
 
     }
 }

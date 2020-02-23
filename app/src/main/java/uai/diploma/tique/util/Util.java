@@ -33,6 +33,28 @@ public class Util {
             case Constantes.I_TICKET:
                 rIcon = R.drawable.ic_local_activity_black_24dp;
                 break;
+            case Constantes.I_CAR:
+                rIcon = R.drawable.ic_directions_car_black_24dp;
+                break;
+            case Constantes.I_BOOK:
+                rIcon = R.drawable.ic_book_black_24dp;
+                break;
+            case Constantes.I_FLOWER:
+                rIcon = R.drawable.ic_local_florist_black_24dp;
+                break;
+            case Constantes.I_BROOM:
+                rIcon = R.drawable.ic_broom;
+                break;
+            case Constantes.I_TUBE:
+                rIcon = R.drawable.ic_tube;
+                break;
+            case Constantes.I_CARWASH:
+                rIcon = R.drawable.ic_local_car_wash_black_24dp;
+                break;
+            case Constantes.I_FOOTBALL:
+                rIcon = R.drawable.ic_football;
+                break;
+
             default:
                 rIcon = R.drawable.ic_home_black_24dp;
                 break;

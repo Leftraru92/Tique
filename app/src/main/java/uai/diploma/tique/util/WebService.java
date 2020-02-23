@@ -34,6 +34,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import uai.diploma.tique.R;
 import uai.diploma.tique.activity.LoginActivity;
+import uai.diploma.tique.activity.SplashActivity;
 import uai.diploma.tique.adapter.AdapterCategorias;
 import uai.diploma.tique.fragment.CategoryFragment;
 import uai.diploma.tique.fragment.IWebServiceFragment;
@@ -48,19 +49,22 @@ public class WebService {
     View rootView, loadingPanel, errorPanel;
     TextView txtMessage;
     static int methodRequest;
+    JSONArray response;
 
     public WebService(Context context, IWebServiceFragment fragment) {
         this.context = context;
         this.fragment = fragment;
 
-        if(fragment!= null) {
-            rootView = ((FragmentActivity) context).getWindow().getDecorView().findViewById(android.R.id.content);
-        }else{
-            rootView = ((Activity) context).getWindow().getDecorView().findViewById(android.R.id.content);
-        }
+        if(fragment!=null || context != null) {
+            if (fragment != null) {
+                rootView = ((FragmentActivity) context).getWindow().getDecorView().findViewById(android.R.id.content);
+            } else if (context != null) {
+                rootView = ((Activity) context).getWindow().getDecorView().findViewById(android.R.id.content);
+            }
             this.loadingPanel = rootView.findViewById(R.id.loadingPanel);
             this.errorPanel = rootView.findViewById(R.id.errorPanel);
             this.txtMessage = rootView.findViewById(R.id.txtMessage);
+        }
 
     }
 
@@ -145,7 +149,8 @@ public class WebService {
                             switch (partialUrl) {
                                 case Constantes.WS_CATEGORIAS:
                                 case Constantes.WS_SUBCATEGORIAS:
-                                    respuestaCategorias(response, context);
+                                    SplashActivity.onResult(response, partialUrl);
+                                    //Categorias(response, context);
                                     break;
                                 case Constantes.WS_SERVICIOS:
                                     respuestaServicios(response, context);
@@ -271,7 +276,7 @@ public class WebService {
 
         return params;
     }
-
+/*
     private void respuestaCategorias(JSONArray response, Context context) throws JSONException {
 
         JSONArray responseJson = new JSONArray(response.toString());
@@ -287,7 +292,7 @@ public class WebService {
 
         this.fragment.onWebServiceResult(categorias);
     }
-
+*/
     private void respuestaServicios(JSONArray response, Context context) throws JSONException {
 
         JSONArray responseJson = new JSONArray(response.toString());

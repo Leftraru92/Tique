@@ -145,6 +145,7 @@ public class ResultadoBusquedaFragment extends Fragment implements IWebServiceFr
             Log.i(Constantes.LOG_NAME, "No se encontró resultado");
             Snackbar.make(rootview.findViewById(R.id.my_recycler_view), "No se encontraron resultados", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show();
+            getFragmentManager().popBackStack();
         }
 
         loading.setVisibility(View.GONE);

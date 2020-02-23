@@ -26,7 +26,7 @@
             android:label="@string/title_activity_nuevo_negocio"></activity>
         <activity
             android:name=".activity.MisNegociosActivity"
-            android:label="@string/title_activity_nuevo_negocio" />
+            android:label="@string/title_activity_mis_negocios" />
         <activity
             android:name=".activity.LoginActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"

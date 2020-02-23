@@ -25,6 +25,7 @@ public class Constantes {
 
 
     public static final String PROJECT_ID = "tique-c318b";
+    public static final CharSequence SELECCIONE = "SELECCIONE";
     public static String TOKEN = " ";
 
     public static final String I_STORE = "store";
@@ -34,6 +35,13 @@ public class Constantes {
     public static final String I_CAFE = "cafe";
     public static final String I_PIZZA = "pizza";
     public static final String I_TICKET = "ticket";
+    public static final String I_CAR = "car";
+    public static final String I_BOOK = "book";
+    public static final String I_FLOWER = "flower";
+    public static final String I_BROOM = "broom";
+    public static final String I_TUBE = "tube";
+    public static final String I_CARWASH = "carwash";
+    public static final String I_FOOTBALL = "football";
 
     public static String LastPhotoUri = "";
 

@@ -21,7 +21,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="88dp"
+            android:layout_height="wrap_content"
             android:background="@android:color/white"
             android:orientation="horizontal"
             android:padding="16dp">
@@ -33,20 +33,21 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:baselineAlignBottom="true"
-                android:src="@drawable/ic_store_mall_directory_black_24dp"
                 android:tint="@color/colorPrimaryDark"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_store_mall_directory_black_24dp" />
 
             <TextView
                 android:id="@+id/txtDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="88dp"
-                android:layout_marginLeft="88dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
                 android:textColor="@color/colorPrimary"
-                android:textSize="16dp"
+                android:textSize="20dp"
                 android:tint="@color/colorPrimaryDark"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/imgIcon"
@@ -57,11 +58,11 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:baselineAlignBottom="true"
-                android:src="@drawable/ic_navigate_next_black_24dp"
                 android:tint="@color/colorPrimaryDark"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_navigate_next_black_24dp" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
